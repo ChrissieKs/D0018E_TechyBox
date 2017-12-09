@@ -1,0 +1,244 @@
+body { 
+   color: #000000;  /*Lila färgen! #9933FF */
+   background-color: #ffffff;
+   font-size: 1.2em;
+}
+
+/* Huvudmeny */
+header {
+    background-color: white;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    height: 90px;
+    width: 100%;
+    overflow:hidden;
+}
+
+.huvudmeny { 
+    text-align: center;
+    border-bottom: solid;
+    border-color: #9933FF;
+    padding: 8px;
+    width: 100%;
+}
+
+/* hemsidans innehåll */
+.contain-all {
+    margin-top: 100px; /* Avoid content overlay with header */
+    margin-bottom: 100px;
+}
+
+.img {
+    width: 50%;
+    float: left;
+}
+
+.inlogg {
+    width: 50%;
+    float: right;
+    height: 300px;
+}
+
+/* Ökar avståndet mellan knappar och inputs */
+#loggain {
+    margin-top: 10px; 
+    margin-bottom: 10px;
+}
+
+#skapaID {
+    margin-top: 10px; 
+    margin-bottom: 10px;
+}
+
+
+fieldset {
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-top: 0em;
+    padding-bottom: 0em;
+    padding-left: 0em;
+    padding-right: 0em;
+    border: 0px groove;
+}
+#Contain-help {
+    float: left;
+}
+
+.sokmeny {
+    padding: 8px;
+    width: 200px;
+}
+
+input[type=text] {
+    border: 2px solid #9933FF;
+    border-radius: 4px;
+}
+
+input[type=password] {
+    border: 2px solid #9933FF;
+    border-radius: 4px;
+}
+
+textarea {
+    border: 2px solid #9933FF;
+    border-radius: 4px;
+}
+
+.buttonskapaID {
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 4px 2px;
+}
+
+.buttonskapaID:hover {
+    background-color: #9933FF; /* Green */
+    color: white;
+}
+
+.buttonloggain {
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 4px 2px;
+}
+
+.buttonloggain:focus {
+    background-color: #9933FF; /* Purple */
+    color: white;
+}
+
+.buttonskapaID:focus {
+    background-color: #9933FF; /* Purple */
+    color: white;
+}
+
+.buttonloggain:hover {
+    background-color: #9933FF; /* Purple */
+    color: white;
+}
+
+
+input[type=submit] {
+    border: 1px solid #9933FF;
+    font-size: 10px;
+    color: #ffffff;
+    background: #9933FF;
+    padding: 15px 32px;
+    border-radius: 3px;
+}
+
+input[type=reset] {
+    border: 1px solid #9933FF;
+    color: #ffffff;
+    background: #9933FF;
+    padding: 15px 32px;
+    border-radius: 3px;
+}
+
+#logout-button {
+    text-decoration: none;
+    color: #9933FF;
+    text-align: right;
+}
+
+#varukorg-tabell {
+    width: 100%;
+}
+
+.noUnderline a {
+    text-decoration: none;
+}
+
+a:visited, a:link {
+    color: #000000;
+}
+
+a:hover, a:active {
+    color: #9933FF;
+}
+
+.items {
+    display: inline-block;
+} 
+
+
+.stars {
+    float:left;
+}
+
+/* :not(:checked) is a filter, so that browsers that don’t support :checked don’t 
+   follow these rules. Every browser that supports :checked also supports :not(), so
+   it doesn’t make the test unnecessarily selective */
+.stars:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+    clip:rect(0,0,0,0);
+}
+
+.stars:not(:checked) > label {
+    float:right;
+    width:1em;
+    padding:0 .1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:200%;
+    line-height:1.2;
+    color:grey;
+    text-shadow:1px 1px black, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.stars:not(:checked) > label:before {
+    content: '★ ';
+}
+
+.stars > input:checked ~ label {
+    color: #9933FF;
+    text-shadow:1px 1px black, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.stars:not(:checked) > label:hover,
+.stars:not(:checked) > label:hover ~ label {
+    color: #9933FF;
+    text-shadow:1px 1px black, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.stars > input:checked + label:hover,
+.stars > input:checked + label:hover ~ label,
+.stars > input:checked ~ label:hover,
+.stars > input:checked ~ label:hover ~ label,
+.stars > label:hover ~ input:checked ~ label {
+    color: blue;
+    text-shadow:1px 1px black, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.stars > label:active {
+    position:relative;
+    top:2px;
+    left:2px;
+}
+
+/* Fotmeny */
+
+footer {
+    background-color: white;
+    position: fixed;
+    text-align: center;
+    bottom: 0;
+    height: 50px;
+    width: 100%;
+    overflow:hidden;
+}
+
+.fotmeny {
+    margin: auto;
+    border-top: solid;
+    border-color: #9933FF;
+    padding: 8px;
+    width: 400px;
+}
+
