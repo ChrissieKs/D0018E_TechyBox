@@ -60,7 +60,8 @@
 			}
 		?>
 
-	<img src="TechyBox_logga.png" alt="logga" height="50" width="50">
+	<!-- Loggan visas, med en länk till startsidan -->
+	<a href="http://utbweb.its.ltu.se/~rebmat-5/welcome.php"><img src="TechyBox_logga.png" alt="logga" height="50" width="50"></a>
 	<h1>Orderbekräftelse</h1>
 	<h2>Tack för din beställning!</h2>
 	Din order behandlas och du kan se detaljerna nedan. Vid frågor är ni välkomna att kontakta oss på 0XX-XXXXXX.

@@ -110,24 +110,24 @@
 				<form method="post" action="action_skapaID.php">
 					<table>
 						<tr>
-							<td><label for="Namn">Namn:</label></td>
-							<td><input type="text" name="Name" pattern="{5,40}" required placeholder="Förnamn Efternamn" id="Namn">*</td>
+							<td><label for="Name">Namn:</label></td>
+							<td><input type="text" name="Name" pattern="{5,40}" required placeholder="Förnamn Efternamn" id="Name">*</td>
 						</tr>
 						<tr>
-							<td><label for="Email">Email:</label></td>
-							<td><input type="text" name="Mejl" pattern=".{9,30}" required id="Email">*</td>
+							<td><label for="mejl">Email:</label></td>
+							<td><input type="text" name="Mejl" pattern=".{9,30}" required id="mejl">*</td>
 						</tr>
 						<tr>
-							<td><label for="Adress">Adress:</label></td>
-							<td><input type="text" name="Address" pattern=".{12,40}" required id="Adress">*</td>
+							<td><label for="adress">Adress:</label></td>
+							<td><input type="text" name="Address" pattern=".{12,40}" required id="adress">*</td>
 						</tr>
 						<tr>
 							<td><label for="telefon">Telefon:</label></td>
 							<td><input type="number" name="Phone_number" required id="telefon" placeholder="07XXXXXXXX">*</td>
 						</tr>
 						<tr>
-							<td><label for="Password">Lösenord:</label></td>
-							<td><input type="password" name="Password" pattern=".{8,40}" required id="Password">*</td>
+							<td><label for="password">Lösenord:</label></td>
+							<td><input type="password" name="Password" pattern=".{8,40}" required id="password">*</td>
 						</tr>
 					</table>
 					<br>
