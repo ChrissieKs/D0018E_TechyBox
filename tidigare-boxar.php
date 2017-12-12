@@ -44,68 +44,92 @@
 		<?php 
 			$sqlitems = mysqli_query($conn, "SELECT * FROM Items");
 
+
 			// Skriver ut varor med fält för stjärnor och kommentarer
 			$counter = 1;
 			$counter2 = 1;
 			while($items = mysqli_fetch_array($sqlitems, MYSQLI_ASSOC)) { ?>
 				<div class="items">
 					<fieldset class = "contain-items">
-						<form action="tidigare-boxar.php?id=<?php echo $items['ID']; ?>" method='POST'>
+						<form method='POST'>
 							<input type="hidden" name="id" value="<?php echo $items['ID']; ?>">
 							<img src="<?php echo $items['Image']; ?>" alt="<?php echo $items['Name'] ?>" height="250" width="250">
 							<h3><?php echo $items['Name']; echo '<br>' ; echo $items['Price'];echo " Kr"; ?></h3>
-						<fieldset>
-							<div class="stars">
-								<input id="star<?php echo $counter2;?>" type="radio" name="star" value="5">
-								<label class="star star5" for="star<?php echo $counter2;?>"></label>
-								<?php $counter2++;?>
+							<fieldset>
+								<div class="stars">
+									<input id="star<?php echo $counter2;?>" type="radio" name="star" value="5">
+									<label class="star star5" for="star<?php echo $counter2;?>"></label>
+									<?php $counter2++;?>
 
-								<input id="star<?php echo $counter2;?>" type="radio" name="star" value="4">
-								<label class="star star4" for="star<?php echo $counter2;?>"></label>
-								<?php $counter2++;?>
+									<input id="star<?php echo $counter2;?>" type="radio" name="star" value="4">
+									<label class="star star4" for="star<?php echo $counter2;?>"></label>
+									<?php $counter2++;?>
 
-								<input id="star<?php echo $counter2;?>" type="radio" name="star" value="3">
-								<label class="star star3" for="star<?php echo $counter2;?>"></label>
-								<?php $counter2++;?>
+									<input id="star<?php echo $counter2;?>" type="radio" name="star" value="3">
+									<label class="star star3" for="star<?php echo $counter2;?>"></label>
+									<?php $counter2++;?>
 
-								<input id="star<?php echo $counter2;?>" type="radio" name="star" value="2">
-								<label class="star star2" for="star<?php echo $counter2;?>"></label>
-								<?php $counter2++;?>
+									<input id="star<?php echo $counter2;?>" type="radio" name="star" value="2">
+									<label class="star star2" for="star<?php echo $counter2;?>"></label>
+									<?php $counter2++;?>
 
-								<input id="star<?php echo $counter2;?>" type="radio" name="star" value="1">
-								<label class="star star1" for="star<?php echo $counter2;?>"></label>
-								<?php $counter2++;?>
-							</div>
-						</fieldset>
-						<br>
+									<input id="star<?php echo $counter2;?>" type="radio" name="star" value="1">
+									<label class="star star1" for="star<?php echo $counter2;?>"></label>
+									<?php $counter2++;?>
+								</div>
+							</fieldset>
+							<br>
 
-						<textarea rows="5" cols="40" maxlength="250" name="comment" required></textarea>
-						<br>
+							<textarea rows="5" cols="40" maxlength="250" name="comment" required></textarea>
+							<br>
 
-						<input type="submit" value="Skicka in" onclick="varuPopup()">
-						<input type="reset" value="Reset">
+							<input type="submit" value="Skicka in" onclick="varuPopup()">
+							<input type="reset" value="Reset">
 						</form>
 						<!-- Skriva ut recensioner -->
-						<!--<?php /*
-							$sqlrev = mysqli_query($conn, "SELECT * FROM Review WHERE Items_ID = $_POST["id"]");
-							$r = mysqli_fetch_array($sqlrev, MYSQLI_ASSOC);*/
+						<?php
+							$iID = $items['ID'];
+							$sqlrev = mysqli_query($conn, "SELECT * FROM Review WHERE Items_ID = '$iID' ");
 						?>
-						<table>
-							<tr>
-								<td><p><?php //echo $r["Customer_ID"] ?></p></td>
-								<td><p><?php //echo $r["Rating"] ?></p></td>
-								<td><p><?php //echo $r["Comment"] ?></p></td>
-							</tr>
-						</table>-->
+						
+						<?php
+						while($r = mysqli_fetch_array($sqlrev, MYSQLI_ASSOC)) { ?>
+							<fieldset class="review">
+								<table>
+									<?php 
+										$cID = $r['Customer_ID'];
+										$sqlname = mysqli_query($conn, "SELECT Name FROM Customer WHERE ID = '$cID' ");
+										$name = mysqli_fetch_array($sqlname, MYSQLI_ASSOC);
+										$countStars = $r["Rating"];
+									?>
+									<th align="left">
+										<p><?php echo $name["Name"]; ?></p>
+									</th>
+									<tr>
+										<td><p>Betyg: </p></td>
+										<td><p>
+										<?php while($countStars > 0) { ?>
+											★ 
+											<?php $countStars--; ?>
+										<?php } ?>
+										</p></td>
+									</tr>
+									<tr>
+										<td><p>Kommentar: </p></td>
+										<td><p><?php echo $r["Comment"]; ?></p></td>
+									</tr>
+								</table>
+							</fieldset><!-- End review -->
+						<?php } ?>
 					</fieldset><!-- End contain-items -->
 					<script>
 						// When the user clicks on submit, open the popup alert box
 						function varuPopup() {
-						     alert("Tack! Ditt kommentar har nu skickats in.");
+						     alert("Tack! Din kommentar har nu skickats in.");
 						}
 					</script>
 				</div><!-- End items -->
-		<?php } ?>
+			<?php } ?><!-- End while-loop -->
 
 		<?php
 			if($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -121,9 +145,7 @@
 				} else {
 				    echo "Error: " . $addReview . "<br>" . $conn->error;
 				}
-
 				$conn->close();
-
 			}
 		?>
 	</div><!-- end contain-all-->
