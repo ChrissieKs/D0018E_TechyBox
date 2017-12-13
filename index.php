@@ -29,7 +29,6 @@
 	?>
 
 	<?php
-
 		// username and password sent from login form
 		if($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -44,20 +43,20 @@
 		    // mysqli_real_escape prevents mySQL Injections. 
 			$Mejl = mysqli_real_escape_string($conn, test_input($_POST['Mejl']));
 			$Password = mysqli_real_escape_string($conn, test_input($_POST['Password'])); 
-			$sql = "SELECT ID FROM Customer WHERE Email = '$Mejl' and Password = '$Password'";
+			$sql = "SELECT ID, Password FROM Customer WHERE Email = '$Mejl'";
 			$result = mysqli_query($conn,$sql);
 			$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
 			$active = $row['active'];
 			$count = mysqli_num_rows($result);
-		  
-			// If result matched $Mejl and $Password, table row must be 1 row
-			if($count == 1) {
-			 session_start();
-			 $_SESSION['login_user'] = $Mejl;
-			 
-			 header("location: welcome.php");
-			}else {
-			 echo "Your email or Password is invalid";
+		  	//echo $Password;
+		  	//echo $result['Password'];
+			// Check password
+			if(password_verify($Password, $row['Password'])) {
+				session_start();
+			 	$_SESSION['login_user'] = $Mejl;
+			 	header("location: welcome.php");
+			} else {
+				echo "Your email or Password is invalid";
 			}
 		}
 

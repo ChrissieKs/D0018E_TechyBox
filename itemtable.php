@@ -2,8 +2,10 @@
 	        	
 	<?php 
 		$sum = 0;
+		mysqli_data_seek($cart, 0);
 		while($c = mysqli_fetch_assoc($cart)){ 
-			$sqlitem = "SELECT Image, Name FROM Items WHERE ID = '$c[Items_ID]'";
+			$itemsID = $c['Items_ID'];
+			$sqlitem = "SELECT Image, Name FROM Items WHERE ID = '$itemsID'";
 			$item = mysqli_query($conn, $sqlitem);
 			$i = mysqli_fetch_assoc($item); ?>
 
