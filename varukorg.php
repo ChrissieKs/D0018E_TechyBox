@@ -45,7 +45,6 @@
 	<div class="contain-all">
 	<div id="container"> 
 		<h1>Varukorg</h1>
-
   		<form action="shipment.php?id=<?php echo $c2['ID']; ?>" method="GET">
         <div id="main"> 
         	<input type="hidden" name="id" value="<?php echo $c2['ID']; ?>">
@@ -53,7 +52,6 @@
         	<?php include('itemtable.php');?>
 			<!-- Godkänna villkor innan man skickar vidare beställningen -->
 	        <input type="submit" value="Bekräfta beställning" id="shipment_button">
-
         </div><!--end main-->
         </form>
         <div id="sidebar"> 

@@ -33,9 +33,8 @@
 		//to get the customers items from shoppingcart
 		$sqlcart = "SELECT * FROM Shoppingcart WHERE Customer_ID = '$cusID'";
 		$cart = mysqli_query($conn, $sqlcart);
-		//$c3 = mysqli_fetch_assoc($cart);
-		//$c4 = $c3['ID'];
-	
+		$c2 = mysqli_fetch_assoc($cart);
+		//echo $c2['ID'];
 
 	?>
 	<?php
@@ -61,7 +60,6 @@
 			}
 		?>
 
-	<!-- Loggan visas, med en länk till startsidan -->
 	<a href="http://utbweb.its.ltu.se/~rebmat-5/welcome.php"><img src="TechyBox_logga.png" alt="logga" height="50" width="50"></a>
 	<h1>Orderbekräftelse</h1>
 	<h2>Tack för din beställning!</h2>

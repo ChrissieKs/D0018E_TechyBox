@@ -9,12 +9,10 @@
 
 			<tr>
 				<td><p>Varunummer </p></td>
-				<td><p><?php echo $shop; echo '<br>' ; ?> </p></td>
+				<td><p><?php echo $c['Items_ID']; echo '<br>' ; ?> </p></td>
 				<td><img src="<?php echo $i['Image']; ?>" height="50" width="50"></td>
 				<td><p><?php echo $i['Name']; echo '<br>' ; ?> </p></td>
 				<td><p><?php echo $c['Price'];echo " Kr"; ?> </p></td>
-
-
 			
 			</tr>
 			<?php $sum = $sum + $c['Price']; ?>
