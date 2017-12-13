@@ -165,6 +165,13 @@ a:hover, a:active {
     display: inline-block;
 } 
 
+.review {
+    table-layout:fixed; 
+    width:100px;
+}
+
+
+
 
 .stars {
     float:left;

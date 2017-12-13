@@ -94,8 +94,8 @@
 						
 						<?php
 						while($r = mysqli_fetch_array($sqlrev, MYSQLI_ASSOC)) { ?>
-							<fieldset class="review">
-								<table>
+							<fieldset>
+								<table class="review">
 									<?php 
 										$cID = $r['Customer_ID'];
 										$sqlname = mysqli_query($conn, "SELECT Name FROM Customer WHERE ID = '$cID' ");
