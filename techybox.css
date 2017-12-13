@@ -222,6 +222,22 @@ a:hover, a:active {
     left:2px;
 }
 
+/* Admin sidan */
+
+.sokCustomer {
+    border-top: solid;
+    border-color: #9933FF;
+}
+
+.customer-tabell{
+   text-align: left;
+    padding: 5px;
+}
+
+
+
+
+
 /* Fotmeny */
 
 footer {

@@ -40,7 +40,8 @@ VALUES ('$Name', '$Mejl', '$Address', '$Phone_number', '$Password')";
 
 //echo "<br>", $Name, "<br>", $Mejl, "<br>", $Address, "<br>", $Phone_number, "<br>", $Password;
 if ($conn->query($sql) === TRUE) {
-    echo "New record created successfully";
+  $message = "Din användare är nu skapad! Testa att logga in!";
+    echo "<script>function varuPopup(){alert($message);}</script>";
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }

@@ -6,7 +6,10 @@
 	<link rel="stylesheet" type="text/css" href="techybox.css">
 </head>
 <body>
-	<header><hr></header>
+	<header>
+		<a href="alteritems.php">Varor</a>
+		<hr>
+	</header>
 	<?php
 		$servername = "utbweb.its.ltu.se";
 		$username = "rebmat-5";

@@ -131,16 +131,14 @@
 						</tr>
 					</table>
 					<br>
-					<input type="submit" name="skapa" value="Spara" onclick="varuPopup()"> 
+					<input type="checkbox" name="agree" required id="villkor">Jag har läst och godkänt <a href="http://utbweb.its.ltu.se/~rebmat-5/om.php">Användarvillkoren</a>.
+					<br>
+					<br>
+					<input type="submit" name="skapa" value="Spara"> 
 				</form>
 			</div> <!-- End #skapaID -->
 		</fieldset>
-		<script>
-			// When the user clicks on submit, open the popup alert box
-			function varuPopup() {
-			     alert("Din användare är nu skapad! Testa att logga in!");
-			}
-		</script>
+		
 
 	<div id="Contain-help">
 		<fieldset>

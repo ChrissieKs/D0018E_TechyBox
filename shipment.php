@@ -33,8 +33,9 @@
 		//to get the customers items from shoppingcart
 		$sqlcart = "SELECT * FROM Shoppingcart WHERE Customer_ID = '$cusID'";
 		$cart = mysqli_query($conn, $sqlcart);
-		$c2 = mysqli_fetch_assoc($cart);
-		//echo $c2['ID'];
+		//$c3 = mysqli_fetch_assoc($cart);
+		//$c4 = $c3['ID'];
+	
 
 	?>
 	<?php
