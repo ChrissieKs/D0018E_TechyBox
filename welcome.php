@@ -32,6 +32,8 @@
 		$sqlcus = mysqli_query($conn, "SELECT * FROM Customer WHERE Email = '$user_check' ");
 		$row = mysqli_fetch_array($sqlcus,MYSQLI_ASSOC);
 		$cusID= $row['ID'];
+
+		$sqlship = mysqli_query($conn, "SELECT * FROM Shipment WHERE Customer_ID = '$cusID'");
 	?>
 
 	<div class="contain-all">
@@ -57,8 +59,21 @@
 	?>
 	<hr>
 	<h3>Ordrar</h3>
-	<hr>
-
+	<table>
+		<tr>
+			<th><?php echo 'Ordernummer: '; ?></th>
+			<th><?php echo 'Adress: '; ?></th>
+			<th><?php echo 'Datum: '; ?></th>
+		</tr>
+		<?php while($rowShip = mysqli_fetch_assoc($sqlship)) { ?>
+			<tr>
+				<td><?php echo $rowShip['ID'];?></td>
+				<td><?php echo $rowShip['Address'];?></td>
+				<td><?php echo $rowShip['Date_Time'];?></td>
+			</tr>
+		<?php } ?>
+		
+	</table>
 
 	</div> <!-- End .contain-all -->
 	<footer>
