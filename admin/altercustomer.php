@@ -20,10 +20,18 @@
 		//echo "Connection successfully";
 
 	?>
+	<!-- Admin sessions -->
+	<?php //include ('admin_session.php'); ?>
 </head>
 <body>
+	<header>
+		<a href="welcomeadmin.php">Startsida</a>
+		<a href="alteritems.php">Varor</a>
+		<a href="altercustomer.php">Kund</a>
+		<a href=additems.php>Lägg till nya varor</a>
+	</header>
 <!--  to update customer information -->
-	<div id="alterCustomer">
+	<div id="alterCustomer" class="contain-all">
 	<form method="post">
 		<table>
 			<tr>

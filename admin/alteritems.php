@@ -19,6 +19,8 @@
 		//echo "Connection successfully";
 
 	?>
+	<!-- Admin sessions -->
+	<?php include ('admin_session.php'); ?>
 </head>
 <body>
 	<header>

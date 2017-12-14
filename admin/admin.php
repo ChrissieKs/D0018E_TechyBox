@@ -6,10 +6,6 @@
 	<link rel="stylesheet" type="text/css" href="techybox.css">
 </head>
 <body>
-	<header>
-		<a href="alteritems.php">Varor</a>
-		<hr>
-	</header>
 	<?php
 		$servername = "utbweb.its.ltu.se";
 		$username = "rebmat-5";
@@ -62,6 +58,7 @@
 		}
 
 	?>
+
 	<div class="contain-all">
 
 	<fieldset class="img">
@@ -73,15 +70,19 @@
 	<fieldset class= "inlogg">
 
 	<div id="loggain">
-		<br>
 		<form method="POST">
-		<label for="Email">Email:</label>
-		<input type="text" name="Mejl" pattern=".{9,40}" required autofocus id="Email"><br>
-		<label for="Password">Lösenord:</label>
-		<input type="password" name="Password" pattern=".{8,40}" required id="Password"><br>
+			<table>
+				<tr>
+					<td><label for="Email">Email:</label></td>
+					<td><input type="text" name="Mejl" pattern=".{9,40}" required autofocus id="Email"></td>
+				</tr>
+				<tr>
+					<td><label for="Password">Lösenord:</label></td>
+					<td><input type="password" name="Password" pattern=".{8,40}" required id="Password"></td>
+				</tr>
+			</table>
 		<input type="submit" name="inlogg" value="Logga in">
 		</form>
-
 	</div>
 	
 	</fieldset>

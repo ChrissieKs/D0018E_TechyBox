@@ -20,9 +20,18 @@
 		//echo "Connection successfully";
 
 	?>
+	<!-- Admin sessions -->
+	<?php //include ('admin_session.php'); ?>
 </head>
 <body>
-	<header><a href="alteritems.php">Varor</a><a href="altercustomer.php">Kund</a></header>
+	<header>
+		<table class="item-tabell" >
+			<tr align="left">
+				<th><a href="alteritems.php">Varor</a></th>
+				<th><a href="altercustomer.php">Kund</a></th>
+			</tr>
+		</table>
+	</header>
 	<div class="contain-all">
 		<h1 id="logout-button"><a href="logout.php">Logga ut</a></h1>
 

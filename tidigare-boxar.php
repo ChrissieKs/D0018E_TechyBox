@@ -94,7 +94,7 @@
 						
 						<?php
 						while($r = mysqli_fetch_array($sqlrev, MYSQLI_ASSOC)) { ?>
-							<fieldset>
+							
 								<table class="review">
 									<?php 
 										$cID = $r['Customer_ID'];
@@ -102,7 +102,7 @@
 										$name = mysqli_fetch_array($sqlname, MYSQLI_ASSOC);
 										$countStars = $r["Rating"];
 									?>
-									<th align="left">
+									<th>
 										<p><?php echo $name["Name"]; ?></p>
 									</th>
 									<tr>
@@ -119,7 +119,7 @@
 										<td><p><?php echo $r["Comment"]; ?></p></td>
 									</tr>
 								</table>
-							</fieldset><!-- End review -->
+							
 						<?php } ?>
 					</fieldset><!-- End contain-items -->
 					<script>
