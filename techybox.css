@@ -242,6 +242,11 @@ table.fixed td:nth-of-type(2) {width:100px;}/*Setting the width of column 2.*/
     border-color: #9933FF;
 }
 
+.second_container {
+    border-top: solid;
+    border-color: #9933FF;
+}
+
 table.customer-tabell{
    text-align: left;
     padding: 5px;

@@ -20,11 +20,11 @@
 
 	?>
 	<!-- Admin sessions -->
-	<?php include ('admin_session.php'); ?>
+	<?php //include ('admin_session.php'); ?>
 </head>
 <body>
 	<header>
-		<?php include(adminheader.php); ?>
+		<?php include('adminheader.php'); ?>
 	</header>
 
 	<div class="contain-all">

@@ -20,11 +20,11 @@
 
 	?>
 	<!-- Admin sessions -->
-	<?php include ('admin_session.php'); ?>
+	<?php //include ('admin_session.php'); ?>
 </head>
 <body>
 	<header>
-		<?php include(adminheader.php); ?>
+		<?php include('adminheader.php'); ?>
 	</header>
 	<div class="contain-all">
 		<h1 id="logout-button"><a href="logout.php">Logga ut</a></h1>

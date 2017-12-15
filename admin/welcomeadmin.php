@@ -25,9 +25,10 @@
 </head>
 <body>
 	<header>
-		<?php include(adminheader.php); ?>
+		<?php include('adminheader.php'); ?>
 	</header>
 	<div class="contain-all">
+		<h1 id="logout-button"><a href="logout.php">Logga ut</a></h1>
 		<!-- sökfält där man skriver in customer id och får all info om customer --> 
 		<h2>Hitta information om Kundens uppgifter och ordrar</h2>
 		<div class="sokCustomer">

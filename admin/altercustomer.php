@@ -25,34 +25,36 @@
 </head>
 <body>
 	<header>
-		<?php include(adminheader.php); ?>
+		<?php include('adminheader.php'); ?>
 	</header>
 <!--  to update customer information -->
 	<div id="alterCustomer" class="contain-all">
-	<form method="post">
-		<table>
-			<tr>
-				<td><label for="Name">Namn:</label></td>
-				<td><input type="text" name="Name" pattern="{5,40}" required placeholder="Förnamn Efternamn" id="Name">*</td>
-			</tr>
-			<tr>
-				<td><label for="mejl">Email:</label></td>
-				<td><input type="text" name="Mejl" pattern=".{9,30}" required id="mejl">*</td>
-			</tr>
-			<tr>
-				<td><label for="adress">Adress:</label></td>
-				<td><input type="text" name="Address" pattern=".{12,40}" required id="adress">*</td>
-			</tr>
-			<tr>
-				<td><label for="telefon">Telefon:</label></td>
-				<td><input type="number" name="Phone_number" required id="telefon" placeholder="07XXXXXXXX">*</td>
-			</tr>
-		</table>
-		<br>
-		<input type="submit" name="change" value="Change"> 
-	</form>
-	</div> <!-- End #alterCustomer -->
-
+	<h1 id="logout-button"><a href="logout.php">Logga ut</a></h1>
+	<h2>Uppdatera kundnformationen genom att fylla i alla fält.</h2>
+	<div class="second_container">
+		<form method="post">
+			<table>
+				<tr>
+					<td><label for="Name">Namn:</label></td>
+					<td><input type="text" name="Name" pattern="{5,40}" required placeholder="Förnamn Efternamn" id="Name">*</td>
+				</tr>
+				<tr>
+					<td><label for="mejl">Email:</label></td>
+					<td><input type="text" name="Mejl" pattern=".{9,30}" required id="mejl">*</td>
+				</tr>
+				<tr>
+					<td><label for="adress">Adress:</label></td>
+					<td><input type="text" name="Address" pattern=".{12,40}" required id="adress">*</td>
+				</tr>
+				<tr>
+					<td><label for="telefon">Telefon:</label></td>
+					<td><input type="number" name="Phone_number" required id="telefon" placeholder="07XXXXXXXX">*</td>
+				</tr>
+			</table>
+			<br>
+			<input type="submit" name="change" value="Ändra"> 
+		</form>
+	</div> <!-- End .second_Container -->
 	<?php
 		if($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -74,4 +76,5 @@
 			$updateTable = mysqli_query("UPDATE Customers SET Name = '$Name', Email = '$Email', Address = '$Address', Phone_number = 'Phone_number' WHERE ID = '$customer_ID'");
 		}
 	?>
+	</div> <!-- End #alterCustomer -->
  </body>
