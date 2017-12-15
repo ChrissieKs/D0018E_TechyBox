@@ -24,9 +24,7 @@
 </head>
 <body>
 	<header>
-		<a href="alteritems.php">Varor</a>
-		<a href="altercustomer.php">Kund</a>
-		<a href=alteritems.php>Sök och ändra varor</a>
+		<?php include(adminheader.php); ?>
 	</header>
 
 	<div class="contain-all">

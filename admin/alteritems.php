@@ -24,9 +24,7 @@
 </head>
 <body>
 	<header>
-		<a href="alteritems.php">Varor</a>
-		<a href="altercustomer.php">Kund</a>
-		<a href=additems.php>Lägg till nya varor</a>
+		<?php include(adminheader.php); ?>
 	</header>
 	<div class="contain-all">
 		<h1 id="logout-button"><a href="logout.php">Logga ut</a></h1>
