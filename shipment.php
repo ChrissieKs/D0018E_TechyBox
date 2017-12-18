@@ -33,11 +33,6 @@
 		//echo $c2['ID'];
 	?>
 	<?php
-			// Get the ID value from varukorg.php
-			$shop = $_GET['id'];
-			//echo '<br>';
-			//echo 'Shop:';
-			//echo $shop;
 			// Hämta datum
 			$date = date("d-m-Y H:i:s");
 			$address = $row['Address'];
@@ -45,11 +40,10 @@
 			$addShop = "INSERT INTO Shipment (Date_Time, Address, Customer_ID)
 			VALUES ('$date', '$address', '$cusID')";
 
-			$sqlship = mysqli_query($conn, "SELECT ID FROM Shipment WHERE Customer_ID = '$cusID' AND Date_Time = '$date'");
-			$ship = mysqli_fetch_array($sqlship, MYSQLI_ASSOC);
-
-
 			if ($conn->query($addShop) === TRUE) {
+				$sqlship = mysqli_query($conn, "SELECT ID FROM Shipment WHERE Customer_ID = '$cusID' AND Date_Time = '$date'");
+				$ship = mysqli_fetch_array($sqlship, MYSQLI_ASSOC);
+				$shipID = $ship['ID'];
 			} else {
 			    echo "Error: " . $addShop . "<br>" . $conn->error;
 			}
@@ -70,7 +64,7 @@
 			</tr>
 			<tr>
 				<td><p>Ordernummer: </p></td>
-				<td><p><?php echo $shop; echo '<br>' ; ?> </p></td>
+				<td><p><?php echo $shipID; echo '<br>' ; ?> </p></td>
 			</tr>
 			<tr>
 				<td><p>Kundnummer: </p></td>
@@ -105,27 +99,29 @@
 		$sum = 0;
 		mysqli_data_seek($cart, 0);
 		while($c = mysqli_fetch_assoc($cart)){ 
-			$itemsID = $c['Items_ID'];
-			$cartID = $c['ID'];
-			$sqlitem = "SELECT Image, Name FROM Items WHERE ID = '$itemsID'";
-			$item = mysqli_query($conn, $sqlitem);
-			$i = mysqli_fetch_assoc($item); 
-			$shipID = $ship['ID']; ?>
+			if($c['Visible'] == 'True') {
+				// Check if items still exist
+				$itemsID = $c['Items_ID'];
+				$cartID = $c['ID'];
+				$sqlitem = "SELECT Image, Name, Visible FROM Items WHERE ID = '$itemsID'";
+				$item = mysqli_query($conn, $sqlitem);
+				$i = mysqli_fetch_assoc($item); 
+				if($i['Visible'] == 'True') {
+				?>
 
-			<tr>
-				<td><p>Varunummer </p></td>
-				<td><p><?php echo $c['Items_ID']; echo '<br>' ; ?> </p></td>
-				<td><img src="<?php echo $i['Image']; ?>" height="50" width="50"></td>
-				<td><p><?php echo $i['Name']; echo '<br>' ; ?> </p></td>
-				<td><p><?php echo $c['Price'];echo " Kr"; ?> </p></td>
-			
-			</tr>
-			<?php $sum = $sum + $c['Price'];
+				<tr>
+					<td><p>Varunummer </p></td>
+					<td><p><?php echo $c['Items_ID']; echo '<br>' ; ?> </p></td>
+					<td><img src="<?php echo $i['Image']; ?>" height="50" width="50"></td>
+					<td><p><?php echo $i['Name']; echo '<br>' ; ?> </p></td>
+					<td><p><?php echo $c['Price'];echo " Kr"; ?> </p></td>
+				
+				</tr>
+				<?php $sum = $sum + $c['Price'];
 
-			$shipshop = "INSERT INTO Ship_shop (Shoppingcart_ID, Shipment_ID) VALUES ('$cartID', '$shipID')";
-			if ($conn->query($shipshop) === TRUE) {
-			} else {
-			    echo "Error: " . $addShop . "<br>" . $conn->error;
+				$shipshop = mysqli_query($conn, "INSERT INTO Ship_shop (Shoppingcart_ID, Shipment_ID) VALUES ('$cartID', '$shipID')");
+				$clearshop = mysqli_query($conn, "UPDATE Shoppingcart SET Visible = 'False' WHERE ID = '$cartID'");
+				}
 			}
 		} ?>
 	<tr>

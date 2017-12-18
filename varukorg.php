@@ -67,7 +67,7 @@
 						$i = mysqli_fetch_array($item, MYSQLI_ASSOC); 
 						$q = $c["Quantity"];
 
-						if(($i['Visible'] == 'True')) { ?>
+						if(($i['Visible'] == 'True' and $c['Visible'] == 'True')) { ?>
 							
 							<tr>
 								<td><p><?php echo $c['Items_ID']; echo '<br>' ; ?></p></td>
