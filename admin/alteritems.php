@@ -28,16 +28,17 @@
 	</header>
 	<div class="contain-all">
 		<h1 id="logout-button"><a href="logout.php">Logga ut</a></h1>
-		<h1>Sök efter en vara</h1>
-
+		<h2>Sök efter en vara</h2>
 		<!-- ruta för att söka efter item som man sedan kan ändra/tabort -->
-		<div class="sokItem">
+		<div class="second_container">
 
 			<br>
 			
 			<fieldset class= "adminsokitems">
 				<label for="sokitems">Varunummer: </label>
 				<form method="post" id="sokform"><input type="text" name="hittaID" placeholder="Sök.." id="sokitems"></form>
+				</br>
+				<!--<input type="submit" name="sok" value="Sök"> -->
 			</fieldset>
 		</div>
 		
@@ -64,24 +65,34 @@
 								<th><p>Namn: </p></th>
 								<th><p>Pris: </p></th>
 								<th><p>Bildadress: </p></th>
-								<th>Ta bort varan: </th>
+								<th><p>Synlighet: </p></th>
+								<th><p>Visa/dölj varan: </p></th>
+								<th><p>Ändra varuinformation: </p></th>
 							</tr>
 							<tr>
 								<td><p><?php echo $item_row['ID']; echo '<br>' ; ?> </p></td>
 								<td><p><?php echo $item_row['Name']; echo '<br>' ; ?> </p></td>
 								<td><p><?php echo $item_row['Price']; echo '<br>' ; ?> </p></td>
 								<td><p><?php echo $item_row['Image']; echo '<br>' ; ?> </p></td>
+								<td><p><?php echo $item_row['Visible']; echo '<br>' ; ?> </p></td>
 								<td>
 									<form action="deleteRow.php?<?php echo $search; ?>" method='GET'>
 									<input type="hidden" name="id" value="<?php echo $search; ?>">	
-									<input type="submit" value="Delete" id="delete_button" onclick="varuPopup()">
+									<input type="submit" value="Ändra synlighet" id="delete_button" onclick="del()">
+									</form>
+								</td>
+								<td>
+									<form action="updateitems.php?<?php echo $search; ?>" method='GET'>
+									<input type="hidden" name="id" value="<?php echo $search; ?>">	
+									<input type="submit" value="Ändra" id="change_button">
+									</form>
 								</td>
 								</tr>
 						</table>
 						<script>
 							// When the user clicks on submit, open the popup alert box
-							function varuPopup() {
-							     alert("Varan har tagits bort!");
+							function del() {
+							     alert("Synligheten har ändrats!");
 							}
 						</script>
 					<?php }
