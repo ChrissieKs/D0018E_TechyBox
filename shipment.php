@@ -10,15 +10,12 @@
 		$servername = "utbweb.its.ltu.se";
 		$username = "rebmat-5";
 		$password = "D0018E";
-
 		//Create connection
 		$conn = mysqli_connect($servername, $username,$password, "rebmat5db");
-
 		//Check connection
 		if (!$conn) {
 			die("Connection failed: " .mysqli_connect_error());
 		}
-
 		//echo "Connection successfully";
 	?>
 
@@ -29,13 +26,11 @@
 		$sqlcus = mysqli_query($conn, "SELECT * FROM Customer WHERE Email = '$user_check' ");
 		$row = mysqli_fetch_array($sqlcus,MYSQLI_ASSOC);
 		$cusID= $row['ID'];
-
 		//to get the customers items from shoppingcart
 		$sqlcart = "SELECT * FROM Shoppingcart WHERE Customer_ID = '$cusID'";
 		$cart = mysqli_query($conn, $sqlcart);
 		$c2 = mysqli_fetch_assoc($cart);
 		//echo $c2['ID'];
-
 	?>
 	<?php
 			// Get the ID value from varukorg.php
@@ -43,21 +38,22 @@
 			//echo '<br>';
 			//echo 'Shop:';
 			//echo $shop;
-
 			// Hämta datum
 			$date = date("d-m-Y H:i:s");
-
 			$address = $row['Address'];
-
 			// För att lägga till varukorg till shipment.
-			$addShop = "INSERT INTO Shipment (Date_Time, Address, Shoppingcart_ID, Customer_ID)
-			VALUES ('$date', '$address' , '$shop', '$cusID')";
+			$addShop = "INSERT INTO Shipment (Date_Time, Address, Customer_ID)
+			VALUES ('$date', '$address', '$cusID')";
+
+			$sqlship = mysqli_query($conn, "SELECT ID FROM Shipment WHERE Customer_ID = '$cusID' AND Date_Time = '$date'");
+			$ship = mysqli_fetch_array($sqlship, MYSQLI_ASSOC);
+
 
 			if ($conn->query($addShop) === TRUE) {
-			   // echo "New record created successfully";
 			} else {
 			    echo "Error: " . $addShop . "<br>" . $conn->error;
 			}
+
 		?>
 
 	<a href="http://utbweb.its.ltu.se/~rebmat-5/welcome.php"><img src="TechyBox_logga.png" alt="logga" height="50" width="50"></a>
@@ -110,9 +106,11 @@
 		mysqli_data_seek($cart, 0);
 		while($c = mysqli_fetch_assoc($cart)){ 
 			$itemsID = $c['Items_ID'];
+			$cartID = $c['ID'];
 			$sqlitem = "SELECT Image, Name FROM Items WHERE ID = '$itemsID'";
 			$item = mysqli_query($conn, $sqlitem);
-			$i = mysqli_fetch_assoc($item); ?>
+			$i = mysqli_fetch_assoc($item); 
+			$shipID = $ship['ID']; ?>
 
 			<tr>
 				<td><p>Varunummer </p></td>
@@ -122,8 +120,14 @@
 				<td><p><?php echo $c['Price'];echo " Kr"; ?> </p></td>
 			
 			</tr>
-			<?php $sum = $sum + $c['Price']; ?>
-	<?php } ?>
+			<?php $sum = $sum + $c['Price'];
+
+			$shipshop = "INSERT INTO Ship_shop (Shoppingcart_ID, Shipment_ID) VALUES ('$cartID', '$shipID')";
+			if ($conn->query($shipshop) === TRUE) {
+			} else {
+			    echo "Error: " . $addShop . "<br>" . $conn->error;
+			}
+		} ?>
 	<tr>
 		<td><h3>Summa: </h3></td>
 		<td><p><?php echo $sum;  ?> Kr</p></td>

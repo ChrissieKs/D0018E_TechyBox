@@ -36,16 +36,30 @@ echo $Item_ID;
 echo $_GET['price'];
 $Price = $_GET['price'];
 
-// För att lägga till items till databasen.
-$addItem = "INSERT INTO Shoppingcart (Price, Customer_ID, Items_ID)
-VALUES ('$Price', '$cusID' , '$Item_ID')";
+// Get item row
+$sqlitem = mysqli_query($conn, "SELECT Quantity FROM Items WHERE ID = '$Item_ID'");
+$q = mysqli_fetch_array($sqlitem, MYSQLI_ASSOC);
 
-if ($conn->query($addItem) === TRUE) {
-    echo "New record created successfully";
-    header("Location: prenumerera.php");
+// För att lägga till items till databasen.
+if($q['Quantity'] == 0) {
+	$addItem = "INSERT INTO Shoppingcart (Price, Customer_ID, Items_ID, Quantity)
+VALUES ('$Price', '$cusID' , '$Item_ID', 1)";
+	if ($conn->query($addItem) === TRUE) {
+	    header("Location: prenumerera.php");
+	} else {
+	    echo "Error: " . $addItem . "<br>" . $conn->error;
+	}
 } else {
-    echo "Error: " . $addItem . "<br>" . $conn->error;
+	$q = $q+1;
+	$price = $Price * $q;
+	$updateItem = "UPDATE Shoppingcart SET Quantity = '$q', Price = '$price' WHERE (Customer_ID = '$cusID', Items_ID = '$Item_ID')";
+	if ($conn->query($updateItem) === TRUE) {
+	    header("Location: prenumerera.php");
+	} else {
+	    echo "Error: " . $addItem . "<br>" . $conn->error;
+	}
 }
+
 
 $conn->close();
 
