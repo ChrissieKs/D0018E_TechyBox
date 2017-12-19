@@ -45,9 +45,8 @@
 	<div class="contain-all">
 	<div id="container"> 
 		<h1>Varukorg</h1>
-  		<form action="shipment.php?id=<?php echo $c2['ID']; ?>" method="GET">
+  		<form action="shipment.php?<?php echo $c['ID']; ?>=" method="GET">
         <div id="main"> 
-        	<input type="hidden" name="id" value="<?php echo $c2['ID']; ?>">
         	<table id="varukorg-tabell">
 				<tr align="left">
 					<th><p>Varunummer</p></th>
@@ -74,7 +73,9 @@
 								<td><p><img src="<?php echo $i['Image']; ?>" height="50" width="50"></p></td>
 								<td><p><?php echo $i['Name']; echo '<br>' ; ?> </p></td>
 								<td><p><?php echo $c['Price'];echo " Kr"; ?> </p></td>
-								<td><input type="text" required value="<?php echo $q; ?>"></td>
+								<td><p><?php echo $q; ?></p></td>
+								<td><input type="button" value="+" onclick="plus()"></td>
+								<td><input type="button" value="-" action="removefromvarukorg.php?id=" value="$itemsID"></td>
 							</tr>
 							<?php $sum = $sum + $c['Price']; ?>
 						<?php }
@@ -86,7 +87,29 @@
 				</tr>
 			</table>
 			<!-- Godkänna villkor innan man skickar vidare beställningen -->
-	        <input type="submit" value="Bekräfta beställning" id="shipment_button">
+	        <input type="submit" value="Bekräfta beställning" id="shipment_button" onclick="up_quant()">
+	        <script>
+	        	function plus(){
+	        		<?php 
+						// För att lägga till items till databasen.
+							$num = $q['Quantity'];
+							$num = $num + 1;
+							$price = $Price * $num;
+							$updateItem = "UPDATE Shoppingcart SET Quantity = '$num', Price = '$price' WHERE (Customer_ID = '$cusID' AND Items_ID = '$Item_ID')";
+							if ($conn->query($updateItem) === TRUE) {
+							    header("Location: varukorg.php");
+							} else {
+							    echo "Error: " . $updateItem . "<br>" . $conn->error;
+							}
+					?>
+	        	}
+	        </script>
+	        <script>
+				function up_quant() {
+				    var input = document.getElementById('<?php echo $c['ID']; ?>');
+					input.setAttribute('value', input.value);
+				}
+			</script>
         </div><!--end main-->
         </form>
         <div id="sidebar"> 

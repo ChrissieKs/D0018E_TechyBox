@@ -133,7 +133,7 @@
 					<input type="checkbox" name="agree" required id="villkor">Jag har läst och godkänt <a href="http://utbweb.its.ltu.se/~rebmat-5/om.php">Användarvillkoren</a>.
 					<br>
 					<br>
-					<input type="submit" name="skapa" value="Spara"> 
+					<button type="submit" name="skapa" value="Spara"></button> 
 				</form>
 			</div> <!-- End #skapaID -->
 		</fieldset>

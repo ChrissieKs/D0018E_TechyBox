@@ -97,6 +97,7 @@
 	        	
 	<?php 
 		$sum = 0;
+		$count = 0;
 		mysqli_data_seek($cart, 0);
 		while($c = mysqli_fetch_assoc($cart)){ 
 			if($c['Visible'] == 'True') {
@@ -118,11 +119,16 @@
 				
 				</tr>
 				<?php $sum = $sum + $c['Price'];
+				
+				if(isset($_GET['antal'])){
 
+				}
+				
 				$shipshop = mysqli_query($conn, "INSERT INTO Ship_shop (Shoppingcart_ID, Shipment_ID) VALUES ('$cartID', '$shipID')");
-				$clearshop = mysqli_query($conn, "UPDATE Shoppingcart SET Visible = 'False' WHERE ID = '$cartID'");
+				$clearshop = mysqli_query($conn, "UPDATE Shoppingcart SET Visible = 'False',Quantity = '$antal'  WHERE ID = '$cartID'");
 				}
 			}
+			$count = $count +1;
 		} ?>
 	<tr>
 		<td><h3>Summa: </h3></td>
