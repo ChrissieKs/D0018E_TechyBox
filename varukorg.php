@@ -48,8 +48,43 @@
   		<form action="shipment.php?id=<?php echo $c2['ID']; ?>" method="GET">
         <div id="main"> 
         	<input type="hidden" name="id" value="<?php echo $c2['ID']; ?>">
-        	
-        	<?php include('itemtable.php');?>
+        	<table id="varukorg-tabell">
+				<tr align="left">
+					<th><p>Varunummer</p></th>
+					<th></th>
+					<th><p>Produktnamn</p></th>
+					<th><p>Pris</p></th>
+					<th><p>Antal</p></th>
+				</tr>
+				        	
+				<?php 
+					$sum = 0;
+					mysqli_data_seek($cart, 0);
+					while($c = mysqli_fetch_assoc($cart)){ 
+						$itemsID = $c['Items_ID'];
+						$sqlitem = "SELECT * FROM Items WHERE ID = '$itemsID'";
+						$item = mysqli_query($conn, $sqlitem);
+						$i = mysqli_fetch_array($item, MYSQLI_ASSOC); 
+						$q = $c["Quantity"];
+
+						if(($i['Visible'] == 'True' and $c['Visible'] == 'True')) { ?>
+							
+							<tr>
+								<td><p><?php echo $c['Items_ID']; echo '<br>' ; ?></p></td>
+								<td><p><img src="<?php echo $i['Image']; ?>" height="50" width="50"></p></td>
+								<td><p><?php echo $i['Name']; echo '<br>' ; ?> </p></td>
+								<td><p><?php echo $c['Price'];echo " Kr"; ?> </p></td>
+								<td><input type="text" required value="<?php echo $q; ?>"></td>
+							</tr>
+							<?php $sum = $sum + $c['Price']; ?>
+						<?php }
+					} ?>
+				<tr>
+					<td><h3>Summa: </h3></td>
+					<td><p><?php echo $sum;  ?> Kr</p></td>
+						
+				</tr>
+			</table>
 			<!-- Godkänna villkor innan man skickar vidare beställningen -->
 	        <input type="submit" value="Bekräfta beställning" id="shipment_button">
         </div><!--end main-->

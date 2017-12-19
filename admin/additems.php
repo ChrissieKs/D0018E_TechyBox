@@ -29,10 +29,10 @@
 
 	<div class="contain-all">
 		<h1 id="logout-button"><a href="logout.php">Logga ut</a></h1>
-		<h1>Lägg till en ny vara</h1>
+		<h2>Lägg till en ny vara</h2>
 
 		<!-- fält där man kan lägga till nya items -->
-		<div id="addItem">
+		<div class="second_container">
 			<form method="post">
 				<table>
 					<tr>
@@ -41,7 +41,7 @@
 					</tr>
 					<tr>
 						<td><label for="price">Pris:</label></td>
-						<td><input type="text" name="price" pattern=".{1,4}" required id="price"></td>
+						<td><input type="text" name="price" pattern=".{1,5}" required id="price"></td>
 					</tr>
 					<tr>
 						<td><label for="image">Bild:</label></td>
@@ -49,7 +49,7 @@
 					</tr>
 				</table>
 				<br>
-				<input type="submit" name="add" value="Add"> 
+				<input type="submit" name="add" value="Lägg till"> 
 			</form>
 		</div> <!-- End #alterItem -->
 
