@@ -37,7 +37,7 @@ echo $_GET['price'];
 $Price = $_GET['price'];
 
 // Get item row
-$sqlitem = mysqli_query($conn, "SELECT Quantity FROM Items WHERE ID = '$Item_ID'");
+$sqlitem = mysqli_query($conn, "SELECT Quantity FROM Shoppingcart WHERE (Items_ID = '$Item_ID' AND Customer_ID = '$cusID')");
 $q = mysqli_fetch_array($sqlitem, MYSQLI_ASSOC);
 
 // För att lägga till items till databasen.
@@ -50,13 +50,14 @@ VALUES ('$Price', '$cusID' , '$Item_ID', 1)";
 	    echo "Error: " . $addItem . "<br>" . $conn->error;
 	}
 } else {
-	$q = $q+1;
-	$price = $Price * $q;
-	$updateItem = "UPDATE Shoppingcart SET Quantity = '$q', Price = '$price' WHERE (Customer_ID = '$cusID', Items_ID = '$Item_ID')";
+	$num = $q['Quantity'];
+	$num = $num + 1;
+	$price = $Price * $num;
+	$updateItem = "UPDATE Shoppingcart SET Quantity = '$num', Price = '$price' WHERE (Customer_ID = '$cusID' AND Items_ID = '$Item_ID')";
 	if ($conn->query($updateItem) === TRUE) {
 	    header("Location: prenumerera.php");
 	} else {
-	    echo "Error: " . $addItem . "<br>" . $conn->error;
+	    echo "Error: " . $updateItem . "<br>" . $conn->error;
 	}
 }
 
