@@ -36,6 +36,8 @@
 	<br>
 	<h2>Hur beställer jag en box?</h2>
 	<p>Kontakta vår kundtjänst på 07XXXXXXXX så kan de hjälpa dig.</p>
+	<h2>Hur ändrar jag mina uppgifter/address?</h2>
+	<p>Det sköter administratören. Kontakta vår kundtjänst på 07XXXXXXXX så kan de hjälpa dig.</p>
 	<h2>Varför har jag inte fått en orderbekräftelse?</h2>
 	<p>Kontakta vår kundtjänst på 07XXXXXXXX så kan de hjälpa dig.</p>
 	<h2>Det går inte att logga in! Vad ska jag göra?</h2>

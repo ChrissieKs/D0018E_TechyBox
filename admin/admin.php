@@ -43,7 +43,6 @@
 			$sqlad = "SELECT ID, Password FROM Admin WHERE Email = '$Mejl'";
 			$result = mysqli_query($conn,$sqlad);
 			$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-			$active = $row['active'];
 			$count = mysqli_num_rows($result);
 
 			// If result matched $Mejl and $Password, table row must be 1 row
@@ -60,7 +59,6 @@
 	?>
 
 	<div class="contain-all">
-
 	<fieldset class="img">
 		<!-- Picture to the left. Jag har fått friheten att använda bilden från pexels.com. -->
 		<img src="https://static.pexels.com/photos/190930/pexels-photo-190930.jpeg" alt="Black Box" height="290" width="500">
