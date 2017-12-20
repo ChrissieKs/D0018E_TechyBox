@@ -21,46 +21,36 @@ include('session.php');
 $sqlq = mysqli_query($conn, "SELECT ID FROM Customer WHERE Email = '$user_check' ");
 $row = mysqli_fetch_array($sqlq,MYSQLI_ASSOC);
 $cusID= $row['ID'];
-echo $cusID;
 
 // Get the ID value from prenumerera.php
 $Item_ID = $_GET['id'];
-echo '<br>';
-echo 'Item ID:';
-echo $Item_ID;
 
-// Get the ID value from prenumerera.php
-
-//echo '<br>';
-//echo 'Price:';
-echo $_GET['price'];
+// Get the price from prenumerera.php
 $Price = $_GET['price'];
 
-// Get item row
-$sqlitem = mysqli_query($conn, "SELECT Quantity FROM Shoppingcart WHERE (Items_ID = '$Item_ID' AND Customer_ID = '$cusID')");
-$q = mysqli_fetch_array($sqlitem, MYSQLI_ASSOC);
+// Get quantity from prenumerera.php
+$quantity = $_GET['quantity'];
 
-// För att lägga till items till databasen.
-if($q['Quantity'] == 0) {
-	$addItem = "INSERT INTO Shoppingcart (Price, Customer_ID, Items_ID, Quantity)
-VALUES ('$Price', '$cusID' , '$Item_ID', 1)";
-	if ($conn->query($addItem) === TRUE) {
-	    header("Location: prenumerera.php");
-	} else {
-	    echo "Error: " . $addItem . "<br>" . $conn->error;
-	}
-} else {
+// Get item row
+$sqlitem = mysqli_query($conn, "SELECT Quantity, Visible FROM Shoppingcart WHERE (Items_ID = '$Item_ID' AND Customer_ID = '$cusID' AND Visible = 'True')");
+If($q = mysqli_fetch_array($sqlitem, MYSQLI_ASSOC)){
 	$num = $q['Quantity'];
-	$num = $num + 1;
-	$price = $Price * $num;
-	$updateItem = "UPDATE Shoppingcart SET Quantity = '$num', Price = '$price' WHERE (Customer_ID = '$cusID' AND Items_ID = '$Item_ID')";
+	$quantity = $num + $quantity;
+	$price = $Price * $quantity;
+	$updateItem = "UPDATE Shoppingcart SET Quantity = '$quantity', Price = '$price' WHERE (Customer_ID = '$cusID' AND Items_ID = '$Item_ID' AND Visible = 'True')";
 	if ($conn->query($updateItem) === TRUE) {
 	    header("Location: prenumerera.php");
 	} else {
 	    echo "Error: " . $updateItem . "<br>" . $conn->error;
 	}
+} else {
+	$addItem = "INSERT INTO Shoppingcart (Price, Customer_ID, Items_ID, Quantity) VALUES ('$Price', '$cusID' , '$Item_ID', '$quantity')";
+	if ($conn->query($addItem) === TRUE) {
+	    header("Location: prenumerera.php");
+	} else {
+	    echo "Error: " . $addItem . "<br>" . $conn->error;
+	}
 }
-
 
 $conn->close();
 

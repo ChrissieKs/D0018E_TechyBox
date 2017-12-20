@@ -38,26 +38,26 @@
 			<div class="items">
 			<fieldset>
 				<form action="addtocart.php?id=<?php echo $r['ID']; ?>&price=<?php echo $r['Price']; ?>" method='GET'>
-				<input type="hidden" name="id" value="<?php echo $r['ID']; ?>">
-				<input type="hidden" name="price" value="<?php echo $r['Price']; ?>">
-				<img src="<?php echo $r['Image']; ?>" alt="<?php echo $r['Name'] ?>" height="250" width="250">
-				<h3>
-					<?php echo $r['Name']; 
-					echo '<br>' ; 
-					echo $r['Price'];
-					echo " Kr";
-					echo '<br>';
-					if($countStars == 0) { ?>
-						</h3><p><?php echo "Inga recensioner"; ?></p><h3>
-					<?php } else {
-						while($countStars > 0) { ?>
-						★ 
-						<?php $countStars--;
-					} 
-					} ?>
-				</h3>
-
-				<input type="submit" value="Lägg till i varukorgen" id="addtocart_button" onclick="varuPopup()">
+					<input type="hidden" name="id" value="<?php echo $r['ID']; ?>">
+					<input type="hidden" name="price" value="<?php echo $r['Price']; ?>">
+					<img src="<?php echo $r['Image']; ?>" alt="<?php echo $r['Name'] ?>" height="250" width="250">
+					<h3>
+						<?php echo $r['Name']; 
+						echo '<br>' ; 
+						echo $r['Price'];
+						echo " Kr";
+						echo '<br>';
+						if($countStars == 0) { ?>
+							</h3><p><?php echo "Inga recensioner"; ?></p><h3>
+						<?php } else {
+							while($countStars > 0) { ?>
+							★ 
+							<?php $countStars--;
+						} 
+						} ?>
+					</h3>
+					<input type="number" name="quantity" value="1" min="0" max="99" required>
+					<input type="submit" value="Lägg till i varukorgen" id="addtocart_button" onclick="varuPopup()">
 
 				</form>
 			</fieldset>

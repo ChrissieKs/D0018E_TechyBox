@@ -93,43 +93,41 @@
 	<br>
 
 	<div id="main"> 
-		<table id="varukorg-tabell">
-	        	
-	<?php 
-		$sum = 0;
-		$count = 0;
-		mysqli_data_seek($cart, 0);
-		while($c = mysqli_fetch_assoc($cart)){ 
-			if($c['Visible'] == 'True') {
-				// Check if items still exist
-				$itemsID = $c['Items_ID'];
-				$cartID = $c['ID'];
-				$sqlitem = "SELECT Image, Name, Visible FROM Items WHERE ID = '$itemsID'";
-				$item = mysqli_query($conn, $sqlitem);
-				$i = mysqli_fetch_assoc($item); 
-				if($i['Visible'] == 'True') {
-				?>
+		<table class="varukorg-tabell">
+			<tr align="left">
+				<th><p>Varunummer</p></th>
+				<th></th>
+				<th><p>Produktnamn</p></th>
+				<th><p>Pris</p></th>
+				<th><p>Antal</p></th>
+			</tr>
+			        	
+			<?php 
+				$sum = 0;
+				mysqli_data_seek($cart, 0);
+				while($c = mysqli_fetch_assoc($cart)){ 
+					$itemsID = $c['Items_ID'];
+					$cartID = $c['ID'];
+					$sqlitem = "SELECT * FROM Items WHERE ID = '$itemsID'";
+					$item = mysqli_query($conn, $sqlitem);
+					$i = mysqli_fetch_array($item, MYSQLI_ASSOC); 
+					$q = $c["Quantity"];
+					if(($i['Visible'] == 'True' and $c['Visible'] == 'True')) { ?>
+						
+						<tr>
+							<td><p><?php echo $c['Items_ID']; echo '<br>' ; ?></p></td>
+							<td><p><img src="<?php echo $i['Image']; ?>" height="50" width="50"></p></td>
+							<td><p><?php echo $i['Name']; echo '<br>' ; ?> </p></td>
+							<td><p><?php echo $c['Price'];echo " Kr"; ?> </p></td>
+							<td><p><?php echo $q; ?></p></td>
+						</tr>
+						<?php $sum = $sum + ($c['Price'] * $q);
 
-				<tr>
-					<td><p>Varunummer </p></td>
-					<td><p><?php echo $c['Items_ID']; echo '<br>' ; ?> </p></td>
-					<td><img src="<?php echo $i['Image']; ?>" height="50" width="50"></td>
-					<td><p><?php echo $i['Name']; echo '<br>' ; ?> </p></td>
-					<td><p><?php echo $c['Price'];echo " Kr"; ?> </p></td>
-				
-				</tr>
-				<?php $sum = $sum + $c['Price'];
-				
-				if(isset($_GET['antal'])){
-
+						$shipshop = mysqli_query($conn, "INSERT INTO Ship_shop (Shoppingcart_ID, Shipment_ID) VALUES ('$cartID', '$shipID')");
+						$clearshop = mysqli_query($conn, "UPDATE Shoppingcart SET Visible = 'False' WHERE ID = '$cartID'");
+					}
 				}
-				
-				$shipshop = mysqli_query($conn, "INSERT INTO Ship_shop (Shoppingcart_ID, Shipment_ID) VALUES ('$cartID', '$shipID')");
-				$clearshop = mysqli_query($conn, "UPDATE Shoppingcart SET Visible = 'False',Quantity = '$antal'  WHERE ID = '$cartID'");
-				}
-			}
-			$count = $count +1;
-		} ?>
+		    ?>
 	<tr>
 		<td><h3>Summa: </h3></td>
 		<td><p><?php echo $sum;  ?> Kr</p></td>
